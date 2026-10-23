@@ -283,6 +283,8 @@ a.plate:hover{border-color:var(--burn)}
 .learn li{margin-bottom:6px}
 .learn code{font-family:var(--mono);font-size:.9em;background:var(--page);padding:1px 5px;border-radius:4px}
 .learn-all{margin:10px 0 0;font-size:14px;color:var(--muted)}
+.buy-link{display:inline-block;margin:4px 0 10px;background:#F2B705;color:#2a1d00;font-weight:700;text-decoration:none;padding:9px 16px;border-radius:10px;font-size:15px}
+.buy-link:hover{background:#FFC93B}
 </style>
 </head>
 <body>
@@ -477,6 +479,7 @@ function renderHub(filter="All"){
   $("#app").innerHTML=`
   <header class="mat"><div class="wrap hub-head">${themeBtnHTML}
     <div style="margin-bottom:14px">${brandLogo(58)}</div><p style="font-size:13px;margin-bottom:8px;letter-spacing:.12em;text-transform:uppercase">Build · Learn · Innovate · ${KIT_INFO.board}</p>
+    <a class="buy-link" href="../buy.html">Buy kits ›</a>
     <h1>${KIT_INFO.name}</h1><p>${KIT_INFO.intro}</p>
     <div class="progress"><div class="bar"><i style="width:${done/PROJECTS.length*100}%"></i></div><span>${done} of ${PROJECTS.length} built</span></div>
   </div></header>
@@ -494,7 +497,7 @@ function renderHub(filter="All"){
       return p.ready ? `<a class="plate${st.done.includes(p.id)?" done":""}" href="${p.id}.html">${inner}</a>`
                      : `<div class="plate soon">${inner}<div style="font-size:12px;margin-top:8px">Guide coming soon</div></div>`;
     }).join("")}</div>
-    <p class="foot">${ready} of ${PROJECTS.length} guides ready. Your progress is saved on this device.</p>
+    <p class="foot">${ready} of ${PROJECTS.length} guides ready. Your progress is saved on this device. · <a href="../buy.html">Buy kits</a> · <a href="../contact.html">Contact</a></p>
   </main>`;
   document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>renderHub(b.dataset.f));
   bindThemeBtn();
@@ -598,7 +601,7 @@ function renderPage(P){
 
     <div class="finish"><button class="btn" id="done">I built it!</button>
       ${next?`<p style="margin-top:16px">Next project: ${next.ready?`<a href="${next.id}.html">${next.n} ${next.title}</a>`:`${next.n} ${next.title} (guide coming soon)`}</p>`:""}</div>
-    <p class="foot">${KIT_INFO.brand} · ${KIT_INFO.name} · ${meta.n}</p>
+    <p class="foot">${KIT_INFO.brand} · ${KIT_INFO.name} · ${meta.n} · <a href="../buy.html">Buy a kit</a></p>
   </main>`;
 
   /* zoomable breadboard photo */
@@ -806,7 +809,7 @@ function renderGuide(G){
     ${G.sections.map((s,si)=>`<section class="block" id="${s.id}"><span class="step-tag">${G.numbered===false?"":"Step "+(si+1)}</span><h2>${s.title}</h2>${s.html}</section>`).join("")}
     <div class="finish">${next?`<a class="btn" href="${next.id}.html" style="text-decoration:none;display:inline-block;padding:14px 26px">Next guide: ${next.n} ${next.title} ›</a>`
       :`<a class="btn" href="${PROJECTS[0].id}.html" style="text-decoration:none;display:inline-block;padding:14px 26px;background:var(--ok);color:#fff">Start your first project: ${PROJECTS[0].n} ${PROJECTS[0].title} ›</a>`}</div>
-    <p class="foot">${KIT_INFO.brand} · ${KIT_INFO.name} · ${meta.n}</p>
+    <p class="foot">${KIT_INFO.brand} · ${KIT_INFO.name} · ${meta.n} · <a href="../buy.html">Buy a kit</a></p>
   </main>`;
   bindThemeBtn();
   document.querySelectorAll(".tabs a").forEach(a=>a.onclick=e=>{e.preventDefault(); document.getElementById(a.getAttribute("href").slice(1)).scrollIntoView({behavior:"smooth"});});
